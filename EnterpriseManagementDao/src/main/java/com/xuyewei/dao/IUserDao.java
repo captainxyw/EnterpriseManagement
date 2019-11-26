@@ -1,10 +1,7 @@
 package com.xuyewei.dao;
 
 import com.xuyewei.domain.UserInfo;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -31,4 +28,31 @@ public interface IUserDao {
                     many = @Many(select="com.xuyewei.dao.IRoleDao.findRoleByUserId"))
     })
     public UserInfo findByUsername(String username) throws Exception;
+
+    @Select("select * from users")
+    @Results({
+            @Result(id=true, property = "id", column = "id"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "phoneNum", column = "phoneNum"),
+            @Result(property = "status", column = "status")
+    })
+    public List<UserInfo> findAll() throws Exception;
+
+    @Results({
+            @Result(id=true, property = "id", column = "id"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "phoneNum", column = "phoneNum"),
+            @Result(property = "status", column = "status"),
+            @Result(property = "roles", column = "id", javaType = List.class,
+                    many = @Many(select="com.xuyewei.dao.IRoleDao.findRoleByUserId"))
+    })
+    @Select("select * from users where id=#{id}")
+    public UserInfo findById(String id) throws Exception;
+
+    @Insert("insert into users(username, email, password, phoneNum, status) values(#{username}, #{email}, #{password}, #{phoneNum}, #{status})")
+    void save(UserInfo userInfo) throws Exception;
 }

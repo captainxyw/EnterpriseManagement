@@ -1,6 +1,9 @@
 package com.xuyewei.service;
 
+import com.xuyewei.domain.UserInfo;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.List;
 
 /**
  * ClassName:IUserService
@@ -13,4 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface IUserService extends UserDetailsService {
 
+    List<UserInfo> findAll() throws Exception;
+
+    UserInfo findById(String id) throws Exception;
+
+    void save(UserInfo userInfo) throws Exception;
 }
