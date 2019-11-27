@@ -72,4 +72,16 @@ public class UserServiceImpl implements IUserService {
         userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
         userDao.save(userInfo);
     }
+
+    @Override
+    public List<Role> findOtherRoles(String id) {
+        return userDao.findOtherRoles(id);
+    }
+
+    @Override
+    public void addRoleToUser(String userId, String[] ids) throws Exception{
+        for(String roleId : ids) {
+            userDao.addRoleToUser(userId, roleId);
+        }
+    }
 }

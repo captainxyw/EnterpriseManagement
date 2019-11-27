@@ -1,5 +1,6 @@
 package com.xuyewei.service;
 
+import com.xuyewei.domain.Role;
 import com.xuyewei.domain.UserInfo;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -21,4 +22,8 @@ public interface IUserService extends UserDetailsService {
     UserInfo findById(String id) throws Exception;
 
     void save(UserInfo userInfo) throws Exception;
+
+    List<Role> findOtherRoles(String id);
+
+    void addRoleToUser(String userId, String[] ids) throws Exception;
 }

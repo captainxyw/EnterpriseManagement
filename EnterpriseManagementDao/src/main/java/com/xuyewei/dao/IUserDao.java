@@ -1,5 +1,6 @@
 package com.xuyewei.dao;
 
+import com.xuyewei.domain.Role;
 import com.xuyewei.domain.UserInfo;
 import org.apache.ibatis.annotations.*;
 
@@ -55,4 +56,10 @@ public interface IUserDao {
 
     @Insert("insert into users(username, email, password, phoneNum, status) values(#{username}, #{email}, #{password}, #{phoneNum}, #{status})")
     void save(UserInfo userInfo) throws Exception;
+
+    @Select("select * from role where id not in (select roleId from users_role where userId=#{userId})")
+    List<Role> findOtherRoles(String userId);
+
+    @Insert("insert into users_role(userId, roleId) values(#{userId}, #{roleId})")
+    void addRoleToUser(@Param("userId")String userId, @Param("roleId")String roleId);
 }
