@@ -19,17 +19,17 @@ import java.util.List;
  * @Author:xuyewei
  */
 @Controller
-@RequestMapping("product")
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
     private IProductService productService;
-    @RequestMapping("save.do")
+    @RequestMapping("/save.do")
     public String save(Product product) throws Exception {
         productService.save(product);
         return "redirect:findAll.do";
     }
-    @RequestMapping("findAll.do")
+    @RequestMapping("/findAll.do")
     @RolesAllowed("ADMIN")
     public ModelAndView findAll() throws Exception {
         ModelAndView mv = new ModelAndView();
