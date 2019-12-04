@@ -1,2 +1,2 @@
-# EnterpriseManagement
-企业权限管理系统
+# EnterpriseManagement(企业权限管理系统)
+前端使用AdminLTE，后端使用SSM框架。
